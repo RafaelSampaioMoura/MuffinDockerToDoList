@@ -1,6 +1,9 @@
-FROM node:14
-WORKDIR /home/rafael/Documents/sd-024-a-project-docker-todo-list/docker/todo-app/front-end
+FROM node:14-alpine
+WORKDIR /my-docker-apps
 EXPOSE 3000
-COPY node_modules.tar.gz /home/rafael/Documents/sd-024-a-project-docker-todo-list/docker/todo-app/front-end
-COPY src /home/rafael/Documents/sd-024-a-project-docker-todo-list/docker/todo-app/front-end
+COPY package-lock.json .
+COPY package.json .
+RUN npm install
+ADD node_modules.tar.gz .
+COPY . .
 ENTRYPOINT [ "npm", "start" ]
